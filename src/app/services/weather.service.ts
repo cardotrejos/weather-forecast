@@ -9,8 +9,8 @@ export class WeatherService {
 
   getForecast(identifier: string) {
     const urls: { [key: string]: string } = {
-      top: 'https://api.weather.gov/gridpoints/TOP/31,80/forecast',
-      lwx: 'https://api.weather.gov/gridpoints/LWX/31,80/forecast',
+      TOP: 'https://api.weather.gov/gridpoints/TOP/31,80/forecast',
+      LWX: 'https://api.weather.gov/gridpoints/LWX/31,80/forecast',
     };
     return this.http.get(urls[identifier]);
   }

@@ -7,7 +7,7 @@ import { Chart, registerables } from 'chart.js';
 @Component({
   selector: 'app-weather',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, HttpClientModule],
   templateUrl: './weather.component.html',
   styleUrls: ['./weather.component.css'],
   providers: [WeatherService],
@@ -23,10 +23,14 @@ export class WeatherComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.weatherService.getForecast(params['id']).subscribe({
+      this.weatherService.getForecast(params['locationId']).subscribe({
         next: (data: any) => {
-          const temperatures = data.properties.periods.map((period: any) => period.temperature);
-          const labels = data.properties.periods.map((period: any) => period.name);
+          const temperatures = data.properties.periods.map(
+            (period: any) => period.temperature
+          );
+          const labels = data.properties.periods.map(
+            (period: any) => period.name
+          );
           this.createChart(labels, temperatures);
         },
         error: (error) => console.error('Error:', error),

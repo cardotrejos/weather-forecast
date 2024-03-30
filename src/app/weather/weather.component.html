@@ -1,3 +1,24 @@
-<div>
-  <canvas id="chart"></canvas>
+<div class="weather-container">
+  <h2>Forecast</h2>
+  <div class="location-links">
+    <a
+      *ngFor="let location of weatherLocations"
+      [routerLink]="['/weather', location.id]"
+      routerLinkActive="active"
+      class="location-link"
+    >
+      {{ location.name }}
+    </a>
+  </div>
+  <div class="chart-container">
+    <div *ngIf="forecastData$ | async as forecastData; else loading">
+      <canvas id="chart" #chartCanvas></canvas>
+    </div>
+    <ng-template #loading>
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading...</div>
+      </div>
+    </ng-template>
+  </div>
 </div>
